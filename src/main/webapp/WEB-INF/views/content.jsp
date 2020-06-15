@@ -14,7 +14,8 @@
 	</tr>
 	<c:forEach items="${list }" var="dto">
 		<tr>
-			<th>${dto.id }</th><th>${dto.name }</th>
+			<th>${dto.id }</th>
+			<th><a href="modify?id=${dto.id }">${dto.name }</a></th>
 		</tr>
 	</c:forEach>
 	<tr>

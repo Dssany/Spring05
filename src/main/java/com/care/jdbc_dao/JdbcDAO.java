@@ -60,13 +60,22 @@ public class JdbcDAO {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public JdbcDTO modify(String id) {
+		String sql = "select * from test_jdbc where id=?";
+		JdbcDTO dto =null;
+		try {
+			con = DriverManager.getConnection(url,user,pwd);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto = new JdbcDTO();
+				dto.setId(rs.getInt("id"));
+				dto.setName(rs.getString("name"));
+			}
+		} catch (Exception e) {
+			
+		}
+		return dto;
+	}
 }
