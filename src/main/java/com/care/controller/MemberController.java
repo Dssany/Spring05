@@ -2,6 +2,8 @@ package com.care.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,20 @@ import com.care.service.JdbcModifySaveServiceImpl;
 import com.care.service.JdbcModifyServiceImpl;
 import com.care.service.JdbcSaveServiceImpl;
 import com.care.service.jdbcService;
+import com.care.template.Constant;
 
 @Controller
 public class MemberController {
+	
+	public MemberController() {
+		String config = "classpath:applicationJDBC.xml";
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
+		JdbcTemplate template = ctx.getBean("template",JdbcTemplate.class);
+		Constant.template = template;
+		System.out.println("====멤버 컨트롤러 실행 ====");
+	}
+	
+	
 	private jdbcService jdbc;
 	@RequestMapping("content")
 	public String content(Model model) {
@@ -60,6 +73,13 @@ public class MemberController {
 		jdbc.execute(model);
 		return "redirect:content";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
