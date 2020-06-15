@@ -1,5 +1,7 @@
 package com.care.service;
 
-public interface jdbcService {
+import org.springframework.ui.Model;
 
+public interface jdbcService {
+	public void execute(Model model);
 }
