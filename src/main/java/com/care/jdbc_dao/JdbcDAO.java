@@ -78,4 +78,33 @@ public class JdbcDAO {
 		}
 		return dto;
 	}
+	
+	public void modifySave(String id,String name) {
+		String sql = "update test_jdbc set name=? where id=?";
+		try {
+			con = DriverManager.getConnection(url,user,pwd);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setInt(2, Integer.parseInt(id));
+			ps.executeUpdate();
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	
+	
+	public void delete(String id) {
+		String sql = "delete from test_jdbc where id=?";
+		try {
+			con = DriverManager.getConnection(url,user,pwd);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(id));
+			ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
 }

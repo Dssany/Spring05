@@ -12,6 +12,7 @@
 		<input type="text" name="name" value="${list.name }"><br>
 		<input type="submit" value="수정">
 		<a href="content">목록이동</a>
+		<a href="delete?id=${list.id }">삭제</a>
 	</form>
 
 </body>

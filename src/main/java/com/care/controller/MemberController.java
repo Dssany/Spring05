@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.service.JdbcContentServiceImpl;
+import com.care.service.JdbcDeleteServiceImpl;
+import com.care.service.JdbcModifySaveServiceImpl;
 import com.care.service.JdbcModifyServiceImpl;
 import com.care.service.JdbcSaveServiceImpl;
 import com.care.service.jdbcService;
@@ -41,6 +43,22 @@ public class MemberController {
 		jdbc = new JdbcModifyServiceImpl();
 		jdbc.execute(model);
 		return "modify";
+	}
+	
+	@RequestMapping("modifySave")
+	public String modifySave(HttpServletRequest request, Model model) {
+		model.addAttribute("request",request);
+		jdbc = new JdbcModifySaveServiceImpl();
+		jdbc.execute(model);
+		return "redirect:content";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(@RequestParam String id, Model model) {
+		model.addAttribute("id",id);
+		jdbc = new JdbcDeleteServiceImpl();
+		jdbc.execute(model);
+		return "redirect:content";
 	}
 	
 	
