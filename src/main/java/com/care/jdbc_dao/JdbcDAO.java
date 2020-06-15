@@ -46,4 +46,27 @@ public class JdbcDAO {
 		return list;
 	}
 	
+	
+	public void save(String id, String name) {
+		String sql = "insert into test_jdbc(id,name) values(?,?)";
+		try {
+			con = DriverManager.getConnection(url,user,pwd);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, name);
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.care.service.JdbcContentServiceImpl;
+import com.care.service.JdbcSaveServiceImpl;
 import com.care.service.jdbcService;
 
 @Controller
@@ -26,7 +27,12 @@ public class MemberController {
 	
 	@RequestMapping("save")
 	public String save(Model model,HttpServletRequest request) {
-		model.addAttribute("request", request);
+		model.addAttribute("request", request);//map 으로 뽑아올시에 앞의값이 키값, 뒷값이 value가된다
+		jdbc = new JdbcSaveServiceImpl();
+		jdbc.execute(model);
+		
+		
+		
 		return "redirect:content";
 	}
 	
