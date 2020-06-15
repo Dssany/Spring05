@@ -23,8 +23,8 @@ public class MemberController {
 	public MemberController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template",JdbcTemplate.class);
-		Constant.template = template;
+		JdbcTemplate template = ctx.getBean("template",JdbcTemplate.class);//template.xml 객체를 생성해서 저장
+		Constant.template = template;//스태틱 변수에저장
 		System.out.println("====멤버 컨트롤러 실행 ====");
 	}
 	

@@ -7,7 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import com.care.jdbc_dto.JdbcDTO;
+import com.care.template.Constant;
 
 public class JdbcDAO {
 	
@@ -19,7 +23,10 @@ public class JdbcDAO {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	private JdbcTemplate template;
+	
 	public JdbcDAO() {
+		this.template = Constant.template;
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -29,6 +36,18 @@ public class JdbcDAO {
 	
 	public ArrayList<JdbcDTO> list(){
 		String sql = "select * from test_jdbc";
+		ArrayList<JdbcDTO> list = null;
+		
+		try {
+			list = (ArrayList<JdbcDTO>)template.query(sql, new BeanPropertyRowMapper<JdbcDTO>(JdbcDTO.class));
+		} catch (Exception e) {
+			e.printStackTrace();//이렇게 작성하는게 더 효율적이다
+		}
+			
+		
+		
+		return list;
+		/*
 		ArrayList<JdbcDTO> list = new ArrayList<JdbcDTO>();
 		try {
 			con = DriverManager.getConnection(url,user,pwd);
@@ -44,6 +63,7 @@ public class JdbcDAO {
 			e.printStackTrace();
 		}
 		return list;
+		*/
 	}
 	
 	
