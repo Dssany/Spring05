@@ -97,26 +97,36 @@ public class JdbcDAO {
 	}
 	
 	public JdbcDTO modify(String id) {
-		String sql = "select * from test_jdbc where id=?";
+		//String sql = "select * from test_jdbc where id=?";
+		String sql = "select * from test_jdbc where id=" + id;
 		JdbcDTO dto =null;
-		try {
-			con = DriverManager.getConnection(url,user,pwd);
-			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				dto = new JdbcDTO();
-				dto.setId(rs.getInt("id"));
-				dto.setName(rs.getString("name"));
-			}
-		} catch (Exception e) {
-			
-		}
+		dto = template.queryForObject(sql, new BeanPropertyRowMapper<JdbcDTO>(JdbcDTO.class));
+		//하나의 값을 얻어오기 위해 queryForObject를 사용
+		
 		return dto;
+//		try {
+//			con = DriverManager.getConnection(url,user,pwd);
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, id);
+//			rs = ps.executeQuery();
+//			if(rs.next()) {
+//				dto = new JdbcDTO();
+//				dto.setId(rs.getInt("id"));
+//				dto.setName(rs.getString("name"));
+//			}
+//		} catch (Exception e) {
+//			
+//		}
+		
 	}
 	
 	public void modifySave(String id,String name) {
 		String sql = "update test_jdbc set name=? where id=?";
+		
+		
+		
+		
+		/*
 		try {
 			con = DriverManager.getConnection(url,user,pwd);
 			ps = con.prepareStatement(sql);
@@ -126,6 +136,7 @@ public class JdbcDAO {
 		} catch (Exception e) {
 			
 		}
+		*/
 	}
 	
 	
