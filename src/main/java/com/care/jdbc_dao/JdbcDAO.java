@@ -15,7 +15,7 @@ import com.care.jdbc_dto.JdbcDTO;
 import com.care.template.Constant;
 
 public class JdbcDAO {
-	
+	/*
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String user = "spring";
@@ -23,16 +23,18 @@ public class JdbcDAO {
 	private Connection con;
 	private PreparedStatement ps;
 	private ResultSet rs;
-	
+	*/
 	private JdbcTemplate template;
 	
 	public JdbcDAO() {
 		this.template = Constant.template;
+		/*
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	public ArrayList<JdbcDTO> list(){
@@ -145,15 +147,19 @@ public class JdbcDAO {
 	
 	
 	public void delete(String id) {
-		String sql = "delete from test_jdbc where id=?";
-		try {
-			con = DriverManager.getConnection(url,user,pwd);
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, Integer.parseInt(id));
-			ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		//String sql = "delete from test_jdbc where id=?";
+		String sql = "delete from test_jdbc where id=" + id;
+		template.update(sql);
+		
+		
+//		try {
+//			con = DriverManager.getConnection(url,user,pwd);
+//			ps = con.prepareStatement(sql);
+//			ps.setInt(1, Integer.parseInt(id));
+//			ps.executeUpdate();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 	}
 	
 	
