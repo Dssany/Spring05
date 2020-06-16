@@ -68,7 +68,7 @@ public class JdbcDAO {
 	}
 	
 	
-	public void save(String id, String name) {
+	public void save(final String id, final String name) {//변경할수 없게 final 선언 
 		String sql = "insert into test_jdbc(id,name) values(?,?)";
 		//"insert into test_jdbc(id,name) values('"+id+"','"+name+"')"; 이렇게 쓰면 template 사용가능
 		template.update(sql,new PreparedStatementSetter() {
