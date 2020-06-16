@@ -122,8 +122,11 @@ public class JdbcDAO {
 	
 	public void modifySave(String id,String name) {
 		String sql = "update test_jdbc set name=? where id=?";
-		
-		
+		//람다식 표현
+		template.update(sql,ps->{
+			ps.setString(1, name);
+			ps.setString(2, id);
+		});
 		
 		
 		/*
