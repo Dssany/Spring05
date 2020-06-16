@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.jdbc_dto.JdbcDTO;
 import com.care.template.Constant;
@@ -35,7 +36,7 @@ public class JdbcDAO {
 	}
 	
 	public ArrayList<JdbcDTO> list(){
-		String sql = "select * from test_jdbc";
+		String sql = "select * from test_jdbc order by id desc";
 		ArrayList<JdbcDTO> list = null;
 		
 		try {
@@ -69,15 +70,30 @@ public class JdbcDAO {
 	
 	public void save(String id, String name) {
 		String sql = "insert into test_jdbc(id,name) values(?,?)";
-		try {
-			con = DriverManager.getConnection(url,user,pwd);
-			ps = con.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setString(2, name);
-			ps.executeUpdate();
-			
-		} catch (Exception e) {
-		}
+		//"insert into test_jdbc(id,name) values('"+id+"','"+name+"')"; 이렇게 쓰면 template 사용가능
+		template.update(sql,new PreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, id);
+				ps.setString(2, name);
+				
+			}});
+		
+		
+		
+		
+		
+		
+//		try {
+//			con = DriverManager.getConnection(url,user,pwd);
+//			ps = con.prepareStatement(sql);
+//			ps.setString(1, id);
+//			ps.setString(2, name);
+//			ps.executeUpdate();
+//			
+//		} catch (Exception e) {
+//		}
 	}
 	
 	public JdbcDTO modify(String id) {
