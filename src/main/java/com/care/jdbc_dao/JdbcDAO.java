@@ -162,5 +162,14 @@ public class JdbcDAO {
 //		}
 	}
 	
+	public int count() {
+		String sql = "select count(*) from test_jdbc";
+		return template.queryForObject(sql, Integer.class);
+	}
+	
+	
+	
+	
+	
 	
 }
